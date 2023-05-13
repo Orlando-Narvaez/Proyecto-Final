@@ -551,7 +551,7 @@ def extraerNombresVariables(texto, indice):
             if j < len(texto) and esDigito(texto[j]):
                 j=j+1
                 lex=texto[indice:j]
-                token = Token(lex,METODOS,j)
+                token = Token(lex,VARIABLES,j)
                 return token
 
 # Extrae una palabra que califique como el nombre valido de un método de la cadena texto a partir de la posición indice
@@ -1264,5 +1264,5 @@ botonEnviar.config(bd=3, font=("Helvetica", 10, "bold"), command=lambda:mainBotA
 botonEnviar.pack(pady=10)
 root.mainloop()
 
-
+# menmaydifigumenigumayiguyonegiguigusumiguresigumuligudivigumodigu@ala1Ala1tipodecideciclo~<>˄˅EntRealCadenaCaracter$Persona15E3.5R%C%#C#PublicoPrivadoHexmodsumresmuldiv12ABCDEF1
 # menmaydifigumenigumayiguyonegiguigusumiguresigumuligudivigumodigu˄˅<>EntRealCadenaCaracterPublicoPrivado$Persona1sumresdivmodmul15E3.5R%C%#C#~ciclodecidetipoAla1ala1@12ABCDEFHex
