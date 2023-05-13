@@ -29,7 +29,6 @@ TIPODATOREAL = 'Identificador para los reales'
 TIPODATOCADENA = 'Identificador para las cadenas'
 TIPODATOCARACTER = 'Identificador para los caracteres'
 CLASE = 'Identificador para las clases'
-TIPOSUMA = 'Identificador para la suma'
 
 # Clase token
 #
@@ -637,6 +636,126 @@ def extraerSimboloCerrarLlaves(texto, indice):
         lex= texto[indice:j]
         token = Token(lex,SIMBOLO_CERRAR_LLAVES,j)
         return token
+
+# Extrae una palabra que califique para los enteros de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#
+def extraerTipoEntero(texto, indice):
+    
+    if texto[indice] == 'E':
+        j = indice+1
+        if j < len(texto) and texto[j] == 'n':
+            j=j+1
+            if j < len(texto) and texto[j] == 't':
+                j= j+1
+                lex= texto[indice:j]
+                token = Token(lex,TIPODATOENTERO,j)
+                return token
+            
+# Extrae una palabra que califique como identificador para reales o tipo de dato real de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#
+def extraerTipoReal(texto, indice):
+    
+    if texto[indice] == 'R':
+        j = indice+1
+        if j < len(texto) and texto[j] == 'e':
+            j=j+1
+            if j < len(texto) and texto[j] == 'a':
+                j=j+1
+                if j < len(texto) and texto[j] == 'l':
+                    j= j+1
+                    lex= texto[indice:j]
+                    token = Token(lex,TIPODATOREAL,j)
+                    return token
+                
+# Extrae una palabra que califique como cadena o el tipo de dato String de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#
+def extraerTipoCadena(texto, indice):
+    
+    if texto[indice] == 'C':
+        j = indice+1
+        if j < len(texto) and texto[j] == 'a':
+            j= j+1
+            if j < len(texto) and texto[j] == 'd':
+                j= j+1
+                if j < len(texto) and texto[j] == 'e':
+                    j= j+1
+                    if j < len(texto) and texto[j] == 'n':
+                        j= j+1
+                        if j < len(texto) and texto[j] == 'a':
+                            j= j+1
+                            lex= texto[indice:j]
+                            token = Token(lex,TIPODATOCADENA,j)
+                            return token
+                        
+# Extrae una palabra que califique como caracter o el tipo caracter de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#
+def extraerTipoCaracter(texto, indice):
+    
+    if texto[indice] == 'C':
+        j = indice+1
+        if j < len(texto) and texto[j] == 'a':
+            j= j+1
+            if j < len(texto) and texto[j] == 'r':
+                j= j+1
+                if j < len(texto) and texto[j] == 'a':
+                    j= j+1
+                    if j < len(texto) and texto[j] == 'c':
+                        j= j+1
+                        if j < len(texto) and texto[j] == 't':
+                            j= j+1
+                            if j < len(texto) and texto[j] == 'e':
+                                j= j+1
+                                if j < len(texto) and texto[j] == 'r':
+                                    j= j+1
+                                    lex= texto[indice:j]
+                                    token = Token(lex,TIPODATOCARACTER,j)
+                                    return token
+                                
+# Extrae una palabra que califique como el nombre valido de una clase de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#
+def extraerNombreClase(texto, indice):
+    
+    if texto[indice] == '$':
+        j=indice+1
+        if j < len(texto) and esLetra(texto[j]):
+            j=j+1
+            while j < len(texto) and esLetra(texto[j]):
+                j=j+1
+            if j < len(texto) and esDigito(texto[j]):
+                j+j+1
+                lex= texto[indice:j]
+                token= Token(lex,CLASE,j)
+                return token
                     
 # Extrae el token de la cadena texto a partir de la posición indice
 #
