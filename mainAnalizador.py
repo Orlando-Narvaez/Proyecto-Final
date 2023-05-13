@@ -20,6 +20,16 @@ CLASETIPO = 'Identificador de clases'
 DECISION = 'Identificador de decisión'
 BUCLE = 'Identificador de ciclos'
 SEPARADORSENTENCIAS = 'Identificador para separar sentencias'
+SIMBOLO_ABRIR_PARENTESIS = 'Identificador para el símbolo de abrir parentesis'
+SIMBOLO_CERRAR_PARENTESIS = 'Identificador para el símbolo de cerrar parentesis'
+SIMBOLO_ABRIR_LLAVES = 'Identificador para el símbolo de abrir llaves'
+SIMBOLO_CERRAR_LLAVES = 'Identificador para el símbolo de cerrar llaves'
+TIPODATOENTERO = 'Identificador para los enteros'
+TIPODATOREAL = 'Identificador para los reales'
+TIPODATOCADENA = 'Identificador para las cadenas'
+TIPODATOCARACTER = 'Identificador para los caracteres'
+CLASE = 'Identificador para las clases'
+TIPOSUMA = 'Identificador para la suma'
 
 # Clase token
 #
@@ -563,6 +573,70 @@ def extraerNombresMetodos(texto, indice):
                 lex= texto[indice:j]
                 token = Token(lex,METODOS,j)
                 return token
+            
+# Extrae una palabra que califique como el simbolo de abrir parentesis de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#       
+def extraerSimboloAbrir(texto, indice):
+    
+    if texto[indice] =='<':
+        j = indice+1
+        lex= texto[indice:j]
+        token = Token(lex,SIMBOLO_ABRIR_PARENTESIS,j)
+        return token
+    
+# Extrae una palabra que califique como el simbolo de cerrar de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#      
+def extraerSimboloCerrar(texto, indice):
+    
+    if texto[indice] =='>':
+        j = indice+1
+        lex= texto[indice:j]
+        token = Token(lex,SIMBOLO_CERRAR_PARENTESIS,j)
+        return token
+
+# Extrae una palabra que califique como el simbolo de abrir llaves de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#       
+def extraerSimboloAbrirLlaves(texto, indice):
+    
+    if texto[indice] =='˄':
+        j = indice+1
+        lex= texto[indice:j]
+        token = Token(lex,SIMBOLO_ABRIR_LLAVES,j)
+        return token
+    
+# Extrae una palabra que califique como el simbolo de cerrar llaves de la cadena texto a partir de la posición indice
+#
+# @texto -> cadena de la cual se extrae un identficador
+# @indice -> posición a partir de la cual se va a extraer el identificador
+# @return ->  retorna el token respectivo al tipo entero 
+#
+# El Token se compone del lexema, el tipo de operador y la posición del siguiente lexema o final del analizado
+#       
+def extraerSimboloCerrarLlaves(texto, indice):
+    
+    if texto[indice] =='˅':
+        j = indice+1
+        lex= texto[indice:j]
+        token = Token(lex,SIMBOLO_CERRAR_LLAVES,j)
+        return token
                     
 # Extrae el token de la cadena texto a partir de la posición indice
 #
