@@ -1,10 +1,11 @@
 '''
-    Desarrollado por: Valentina Oviedo Sanchez, Orlando Narvaez Baracaldo y Eliana Yiset Hernandez Ortiz :)
+    Desarrollado por:   Valentina Oviedo Sanchez :D
+                        Orlando Narvaez Baracaldo  :P
+                        Eliana Yiset Hernandez Ortiz :)
     Aginatura: TLF
     Nombre: Analizador lexico
     Cadena a evaluar:
-    me
-    nmaydifigumenigumayiguyonegiguigusumiguresigumuligudivigumodigu˄˅<>EntRealCadenaCaracterPublicoPrivado$Persona1sumresdivmodmul15E3.5R%C%#C#~ciclodecidetipoAla1ala1@12ABCDEFHex
+    menmaydifigumenigumayiguyonegiguigusumiguresigumuligudivigumodigu˄˅<>EntRealCadenaCaracterPublicoPrivado$Persona1sumresdivmodmul15E3.5R%C%#C#~ciclodecidetipoAla1ala1@12ABCDEFHex
 '''
 from tkinter import *
 from tkinter import messagebox
@@ -28,6 +29,7 @@ TIPODATOENTERO = 'Identificador para los enteros'
 TIPODATOREAL = 'Identificador para los reales'
 TIPODATOCADENA = 'Identificador para las cadenas'
 TIPODATOCARACTER = 'Identificador para los caracteres'
+TIPOHEXADECIMAL = 'Identificador para los hexadecimales'
 CLASE = 'Identificador para las clases'
 OPERADORENTERO = 'Identificador para la asignacion de enteros'
 OPERADORREAL = 'Identificador para la asignacion de reales'
@@ -526,6 +528,14 @@ def esLetra(caracter):
 def esDigito(caracter):
     return caracter >= '0' and caracter <= '9'         
 
+# Función auxiliar para identificar las cadenas
+#
+# @caracter -> caracter a analizar
+# @return ->  retorna true o false, dependiendo si el caracter cumple con la condición de ser un número
+#   
+def esCadena(caracter):
+    return (caracter >= ' ' and caracter <= '$') or (caracter >= '&' and caracter <= '~')      
+
 # Extrae una palabra que califique como el nombre valido de una variable de la cadena texto a partir de la posición indice
 #
 # @texto -> cadena de la cual se extrae un identficador
@@ -761,7 +771,7 @@ def extraerNombreClase(texto, indice):
                 j=j+1
             if j < len(texto) and esDigito(texto[j]):
                 j+j+1
-                lex= texto[indice:j]
+                lex= texto[indice:j+1]
                 token= Token(lex,CLASE,j)
                 return token
             
@@ -826,13 +836,13 @@ def extraerAsignacionCadenas(texto, indice):
     
     if texto[indice] == '%':
         j=indice+1
-        if j<len(texto) and texto[j] == 'C':
+        while j < len(texto) and esCadena(texto[j]):
             j=j+1
-            if j<len(texto) and texto[j] =='%':
-                j=j+1
-                lex=texto[indice:j]
-                token=Token(lex,OPERADORCADENA,j)
-                return token
+        if j < len(texto) and texto[j] == '%':
+            j=j+1
+            lex=texto[indice:j]
+            token = Token(lex,OPERADORCADENA,j)
+            return token
             
 # Extrae una palabra que califique como la asignación de los caracteres de la cadena texto a partir de la posición indice
 #
@@ -846,7 +856,7 @@ def extraerAsignacionCaracter(texto, indice):
     
     if texto[indice] == "#":
         j=indice+1
-        if j<len(texto) and texto[j] == 'C':
+        if j<len(texto) and esLetra(texto[j]):
             j=j+1
             if j<len(texto) and texto[j] =="#":
                 j=j+1
@@ -915,7 +925,7 @@ def extraerTipoHexadecimal(texto, indice):
             if j < len(texto) and texto[j] == 'x':
                 j= j+1
                 lex= texto[indice:j]
-                token = Token(lex,OPERADORHEXADECIMAL,j)
+                token = Token(lex,TIPOHEXADECIMAL,j)
                 return token
             
 # Extrae una palabra que califique como un valor hexadecimal de la cadena texto a partir de la posición indice
@@ -1242,7 +1252,7 @@ root.title("Analizador léxico")
 root.geometry("685x600")
 root.resizable(width=False, height=False)
 
-img = PhotoImage(file='./img/bot.png')
+img = PhotoImage(file='./img/botP.png')
 imgRB = PhotoImage(file='./img/botR.png')
 imgRU = PhotoImage(file='./img/usuario.png')
 
